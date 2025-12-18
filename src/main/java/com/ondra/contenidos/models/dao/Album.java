@@ -14,9 +14,11 @@ import java.util.List;
 /**
  * Entidad que representa un álbum musical en el sistema.
  *
- * <p>Un álbum pertenece a un artista y contiene múltiples canciones
+ * <p>
+ * Un álbum pertenece a un artista y contiene múltiples canciones
  * ordenadas por número de pista. La información completa del artista
- * se obtiene del microservicio de Usuarios mediante el idArtista.</p>
+ * se obtiene del microservicio de Usuarios mediante el idArtista.
+ * </p>
  */
 @Entity
 @Table(name = "albumes", indexes = {
@@ -93,6 +95,46 @@ public class Album {
     private List<AlbumCancion> albumCanciones = new ArrayList<>();
 
     /**
+     * Items del carrito que referencian este álbum.
+     * Al eliminar el álbum, se eliminan automáticamente los items del carrito.
+     */
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<CarritoItem> carritoItems = new ArrayList<>();
+
+    /**
+     * Compras que referencian este álbum.
+     * Al eliminar el álbum, se eliminan automáticamente las compras.
+     */
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Compra> compras = new ArrayList<>();
+
+    /**
+     * Valoraciones que referencian este álbum.
+     * Al eliminar el álbum, se eliminan automáticamente las valoraciones.
+     */
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Valoracion> valoraciones = new ArrayList<>();
+
+    /**
+     * Favoritos que referencian este álbum.
+     * Al eliminar el álbum, se eliminan automáticamente los favoritos.
+     */
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Favorito> favoritos = new ArrayList<>();
+
+    /**
+     * Comentarios que referencian este álbum.
+     * Al eliminar el álbum, se eliminan automáticamente los comentarios.
+     */
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Comentario> comentarios = new ArrayList<>();
+
+    /**
      * Establece la fecha de publicación al crear el álbum si no está definida.
      */
     @PrePersist
@@ -103,7 +145,8 @@ public class Album {
     }
 
     /**
-     * Calcula la duración total del álbum sumando las duraciones de todas sus canciones.
+     * Calcula la duración total del álbum sumando las duraciones de todas sus
+     * canciones.
      *
      * @return duración total en segundos
      */
@@ -168,7 +211,7 @@ public class Album {
     /**
      * Añade una canción al álbum con un número de pista específico.
      *
-     * @param cancion canción a añadir
+     * @param cancion     canción a añadir
      * @param numeroPista posición de la canción en el álbum
      */
     public void agregarCancion(Cancion cancion, Integer numeroPista) {

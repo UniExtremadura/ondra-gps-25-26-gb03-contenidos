@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-@Profile("dev")
+@Profile({"dev", "docker"})
 public class ContenidosDataSeederService implements CommandLineRunner {
 
     private final CancionRepository cancionRepository;
@@ -122,6 +122,13 @@ public class ContenidosDataSeederService implements CommandLineRunner {
     public void run(String... args) {
         if (!seedEnabled) {
             log.info("⏭️  Data seeding deshabilitado");
+            return;
+        }
+
+        // Verificar si ya hay datos en la base de datos
+        long cancionesExistentes = cancionRepository.count();
+        if (cancionesExistentes > 0) {
+            log.info("✅ Base de datos ya contiene {} canciones. Seeding omitido (datos ya existen)", cancionesExistentes);
             return;
         }
 

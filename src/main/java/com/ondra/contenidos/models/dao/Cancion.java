@@ -14,9 +14,12 @@ import java.util.List;
 /**
  * Entidad que representa una canción en el catálogo de la plataforma.
  *
- * <p>Una canción pertenece a un artista y puede estar asociada a múltiples álbumes
- * mediante la tabla intermedia AlbumCancion. Incluye información sobre el archivo
- * de audio, portada, duración y estadísticas de reproducción.</p>
+ * <p>
+ * Una canción pertenece a un artista y puede estar asociada a múltiples álbumes
+ * mediante la tabla intermedia AlbumCancion. Incluye información sobre el
+ * archivo
+ * de audio, portada, duración y estadísticas de reproducción.
+ * </p>
  */
 @Entity
 @Table(name = "canciones", indexes = {
@@ -110,6 +113,46 @@ public class Cancion {
     @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<AlbumCancion> albumCanciones = new ArrayList<>();
+
+    /**
+     * Items del carrito que referencian esta canción.
+     * Al eliminar la canción, se eliminan automáticamente los items del carrito.
+     */
+    @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<CarritoItem> carritoItems = new ArrayList<>();
+
+    /**
+     * Compras que referencian esta canción.
+     * Al eliminar la canción, se eliminan automáticamente las compras.
+     */
+    @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Compra> compras = new ArrayList<>();
+
+    /**
+     * Valoraciones que referencian esta canción.
+     * Al eliminar la canción, se eliminan automáticamente las valoraciones.
+     */
+    @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Valoracion> valoraciones = new ArrayList<>();
+
+    /**
+     * Favoritos que referencian esta canción.
+     * Al eliminar la canción, se eliminan automáticamente los favoritos.
+     */
+    @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Favorito> favoritos = new ArrayList<>();
+
+    /**
+     * Comentarios que referencian esta canción.
+     * Al eliminar la canción, se eliminan automáticamente los comentarios.
+     */
+    @OneToMany(mappedBy = "cancion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Comentario> comentarios = new ArrayList<>();
 
     /**
      * Establece valores por defecto al momento de persistencia.
