@@ -49,6 +49,98 @@ public class CloudinaryService {
     private long maxImageSize;
 
     /**
+     * Lista de URLs protegidas que nunca se eliminarán de Cloudinary.
+     * Usadas principalmente para datos de seeding y desarrollo.
+     */
+    private static final List<String> URLS_PROTEGIDAS = List.of(
+            // === URLs DE AUDIO (CANCIONES) ===
+            // Aitana - Alpha
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203010/01_losangeles_s2bjre.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203017/02_lasbabys_edvpit.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203019/03_darari_wpzcyl.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203021/04_aqyne_rjazqj.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203023/05_miamor_wwyctx.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203027/06_formentera_tzouxa.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203025/07_enelcoche_hkuwt0.mp3",
+            // Aitana - Cuarto Azul
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203421/01_6defebrero_ibw712.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203423/02_segundointento_ejd5yr.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203425/03_cuandohablesconel_wpxmh6.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203428/04_superestrella_ftpprh.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203429/05_conexionpsiquica_sfrxya.mp3",
+            // Duki - Ameri
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203641/01_nuevaera_s0v6px.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203642/02_brindis_kfa0tc.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203645/03_hardaway_r6bfrp.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203647/04_ameri_kmxz9b.mp3",
+            // Duki - Desde el Fin del Mundo
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203814/01_sudorytrabajo_uaoihn.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203817/02_malbec_cy9hcf.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203822/03_rapido_wixsjz.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203819/04_cascada_nlotlu.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203827/05_pintao_yd37a2.mp3",
+            // Duki - Singles
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203919/antesdeperderte_ukwtus.mp3",
+            // Sanguijuelas del Guadiana - Revolá
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204158/01_intro_k9maj8.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204162/02_1000amapolas_ccwn0l.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204172/03_jaribe_rpeu0y.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204175/04_septiembre_k5dei4.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204165/05_llevadmeamiextremadura_ic88ii.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204169/06_revola_kvvjmb.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204179/07_intacto_lrtd1z.mp3",
+            // Avicii - True
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204337/01_heybrother_il6jdd.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204335/02_youmakeme_stdl7n.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204331/03_addictedtoyou_tejm7a.mp3",
+            // Avicii - Singles
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204428/levels_ds2jmy.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204604/thenights_tglv4l.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204609/wakemeup_cd467f.mp3",
+            // Rosalía - El Mal Querer
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764205154/01_malamente_xe118k.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764205144/02_piensoentumira_k6nb3r.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764205149/03_bagdad_dmoqcm.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764205157/04_nana_i3usbq.mp3",
+            // Rosalía - Singles
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764205163/despecha_sdc2mw.mp3",
+            // Daddy Yankee - Prestige
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204656/01_perrossalvajes_oegwli.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204659/02_limbo_slntng.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204662/03_lovumba_cemwnc.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204652/04_pasarela_tedvft.mp3",
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204666/05_elamante_kpz3wq.mp3",
+            // Daddy Yankee - Singles
+            "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764204837/gasolina_queplv.mp3",
+
+            // === URLs DE PORTADAS (IMÁGENES) ===
+            // Aitana - Álbumes
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996438/alpha_g3u9em.jpg",
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996437/cuartoazul_pulgxz.jpg",
+            // Duki - Álbumes
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996291/ameri_kgqmuo.jpg",
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996291/desdeelfindelmundo_yyaz3y.jpg",
+            // Duki - Singles
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996291/antesdeperderte_vxrxz1.jpg",
+            // Sanguijuelas del Guadiana - Álbumes
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204128/cover_rzbuen.jpg",
+            // Avicii - Álbumes
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204341/cover_oya6ma.jpg",
+            // Avicii - Singles
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204344/cover_pglkku.jpg",
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204349/cover_fo5cqa.jpg",
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204354/cover_yvezjj.jpg",
+            // Rosalía - Álbumes
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764205173/cover_wo3lhq.jpg",
+            // Rosalía - Singles
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764205168/cover_wpzzdh.jpg",
+            // Daddy Yankee - Álbumes
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204670/cover_vgefhq.jpg",
+            // Daddy Yankee - Singles
+            "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204707/cover_ty52br.jpg"
+    );
+
+    /**
      * Resultado de subida de audio con metadata extraída.
      */
     @Data
@@ -199,12 +291,21 @@ public class CloudinaryService {
      * <p>Detecta automáticamente el tipo de recurso (audio como video o imagen)
      * basándose en la ruta del archivo.</p>
      *
+     * <p>Las URLs protegidas (definidas en URLS_PROTEGIDAS) nunca se eliminarán,
+     * útil para preservar archivos de seeding y desarrollo.</p>
+     *
      * @param fileUrl URL completa del archivo a eliminar
      * @throws FileDeletionFailedException si falla la eliminación
      */
     public void eliminarArchivo(String fileUrl) {
         if (fileUrl == null || fileUrl.isEmpty()) {
             log.warn("⚠️ Se intentó eliminar un archivo con URL nula o vacía");
+            return;
+        }
+
+        // Verificar si la URL está protegida
+        if (URLS_PROTEGIDAS.contains(fileUrl)) {
+            log.info("🔒 URL protegida del seeder, no se eliminará: {}", fileUrl);
             return;
         }
 

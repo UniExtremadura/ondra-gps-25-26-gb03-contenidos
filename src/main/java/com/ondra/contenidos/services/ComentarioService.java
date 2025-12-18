@@ -27,8 +27,12 @@ import java.util.Map;
 /**
  * Servicio para gestión de comentarios en canciones y álbumes.
  *
- * <p>Proporciona operaciones de creación, edición, eliminación y consulta de comentarios.
- * Sincroniza automáticamente los datos de usuario con el microservicio de usuarios.</p>
+ * <p>
+ * Proporciona operaciones de creación, edición, eliminación y consulta de
+ * comentarios.
+ * Sincroniza automáticamente los datos de usuario con el microservicio de
+ * usuarios.
+ * </p>
  */
 @Slf4j
 @Service
@@ -41,7 +45,8 @@ public class ComentarioService {
     private final UsuariosClient usuariosClient;
 
     /**
-     * Clase interna para almacenar datos del usuario obtenidos del microservicio de usuarios.
+     * Clase interna para almacenar datos del usuario obtenidos del microservicio de
+     * usuarios.
      */
     private static class DatosUsuario {
         String nombre;
@@ -52,17 +57,23 @@ public class ComentarioService {
     /**
      * Crea un nuevo comentario en una canción o álbum.
      *
-     * <p>Valida el tipo de usuario y obtiene los datos actualizados desde el microservicio
-     * de usuarios. Si el usuario comenta como artista, utiliza el perfil de artista.</p>
+     * <p>
+     * Valida el tipo de usuario y obtiene los datos actualizados desde el
+     * microservicio
+     * de usuarios. Si el usuario comenta como artista, utiliza el perfil de
+     * artista.
+     * </p>
      *
-     * @param idUsuario identificador del usuario autenticado (del token JWT)
-     * @param idArtista identificador del artista autenticado (del token JWT, puede ser null)
+     * @param idUsuario   identificador del usuario autenticado (del token JWT)
+     * @param idArtista   identificador del artista autenticado (del token JWT,
+     *                    puede ser null)
      * @param tipoUsuario tipo de usuario (USUARIO o ARTISTA)
-     * @param dto datos del comentario a crear
+     * @param dto         datos del comentario a crear
      * @return comentario creado
-     * @throws IllegalStateException si el usuario es artista pero no tiene artistId
+     * @throws IllegalStateException    si el usuario es artista pero no tiene
+     *                                  artistId
      * @throws CancionNotFoundException si la canción especificada no existe
-     * @throws AlbumNotFoundException si el álbum especificado no existe
+     * @throws AlbumNotFoundException   si el álbum especificado no existe
      */
     @Transactional
     public ComentarioDTO crearComentario(Long idUsuario, Long idArtista, String tipoUsuario, CrearComentarioDTO dto) {
@@ -108,15 +119,17 @@ public class ComentarioService {
     /**
      * Edita el contenido de un comentario existente.
      *
-     * <p>Solo el autor del comentario puede editarlo. Actualiza también los datos
-     * del usuario por si han cambiado desde la creación del comentario.</p>
+     * <p>
+     * Solo el autor del comentario puede editarlo. Actualiza también los datos
+     * del usuario por si han cambiado desde la creación del comentario.
+     * </p>
      *
      * @param idComentario identificador del comentario a editar
-     * @param idUsuario identificador del usuario autenticado
-     * @param dto datos actualizados del comentario
+     * @param idUsuario    identificador del usuario autenticado
+     * @param dto          datos actualizados del comentario
      * @return comentario actualizado
      * @throws ComentarioNotFoundException si el comentario no existe
-     * @throws AccesoDenegadoException si el usuario no es el autor
+     * @throws AccesoDenegadoException     si el usuario no es el autor
      */
     @Transactional
     public ComentarioDTO editarComentario(Long idComentario, Long idUsuario, EditarComentarioDTO dto) {
@@ -146,12 +159,14 @@ public class ComentarioService {
     /**
      * Lista los comentarios de una canción con paginación.
      *
-     * <p>Actualiza los datos de usuario de todos los comentarios antes de devolverlos
-     * para sincronizar cambios de perfil.</p>
+     * <p>
+     * Actualiza los datos de usuario de todos los comentarios antes de devolverlos
+     * para sincronizar cambios de perfil.
+     * </p>
      *
      * @param idCancion identificador de la canción
-     * @param pagina número de página (base 1)
-     * @param limite cantidad de elementos por página (máximo 100)
+     * @param pagina    número de página (base 1)
+     * @param limite    cantidad de elementos por página (máximo 100)
      * @return comentarios paginados ordenados por fecha descendente
      * @throws CancionNotFoundException si la canción no existe
      */
@@ -181,12 +196,14 @@ public class ComentarioService {
     /**
      * Lista los comentarios de un álbum con paginación.
      *
-     * <p>Actualiza los datos de usuario de todos los comentarios antes de devolverlos
-     * para sincronizar cambios de perfil.</p>
+     * <p>
+     * Actualiza los datos de usuario de todos los comentarios antes de devolverlos
+     * para sincronizar cambios de perfil.
+     * </p>
      *
      * @param idAlbum identificador del álbum
-     * @param pagina número de página (base 1)
-     * @param limite cantidad de elementos por página (máximo 100)
+     * @param pagina  número de página (base 1)
+     * @param limite  cantidad de elementos por página (máximo 100)
      * @return comentarios paginados ordenados por fecha descendente
      * @throws AlbumNotFoundException si el álbum no existe
      */
@@ -216,12 +233,14 @@ public class ComentarioService {
     /**
      * Lista todos los comentarios realizados por un usuario con paginación.
      *
-     * <p>Actualiza los datos de usuario de todos los comentarios antes de devolverlos
-     * para sincronizar cambios de perfil.</p>
+     * <p>
+     * Actualiza los datos de usuario de todos los comentarios antes de devolverlos
+     * para sincronizar cambios de perfil.
+     * </p>
      *
      * @param idUsuario identificador del usuario
-     * @param pagina número de página (base 1)
-     * @param limite cantidad de elementos por página (máximo 100)
+     * @param pagina    número de página (base 1)
+     * @param limite    cantidad de elementos por página (máximo 100)
      * @return comentarios paginados ordenados por fecha descendente
      */
     @Transactional
@@ -246,13 +265,17 @@ public class ComentarioService {
     /**
      * Elimina un comentario.
      *
-     * <p>Puede eliminar el comentario el autor o el artista propietario del contenido comentado.</p>
+     * <p>
+     * Puede eliminar el comentario el autor o el artista propietario del contenido
+     * comentado.
+     * </p>
      *
      * @param idComentario identificador del comentario a eliminar
-     * @param idUsuario identificador del usuario autenticado
-     * @param tipoUsuario tipo de usuario autenticado
+     * @param idUsuario    identificador del usuario autenticado
+     * @param tipoUsuario  tipo de usuario autenticado
      * @throws ComentarioNotFoundException si el comentario no existe
-     * @throws AccesoDenegadoException si el usuario no tiene permisos para eliminar
+     * @throws AccesoDenegadoException     si el usuario no tiene permisos para
+     *                                     eliminar
      */
     @Transactional
     public void eliminarComentario(Long idComentario, Long idUsuario, String tipoUsuario) {
@@ -280,7 +303,9 @@ public class ComentarioService {
     /**
      * Elimina todos los comentarios de un usuario.
      *
-     * <p>Utilizado cuando se elimina un usuario del sistema.</p>
+     * <p>
+     * Utilizado cuando se elimina un usuario del sistema.
+     * </p>
      *
      * @param idUsuario identificador del usuario
      */
@@ -292,8 +317,11 @@ public class ComentarioService {
     /**
      * Actualiza los datos de los usuarios en los comentarios listados.
      *
-     * <p>Sincroniza nombre, slug y foto de perfil con el microservicio de usuarios.
-     * Solo persiste los comentarios que han cambiado para optimizar escrituras en base de datos.</p>
+     * <p>
+     * Sincroniza nombre, slug y foto de perfil con el microservicio de usuarios.
+     * Solo persiste los comentarios que han cambiado para optimizar escrituras en
+     * base de datos.
+     * </p>
      *
      * @param comentarios lista de comentarios a actualizar
      * @return lista de comentarios con datos actualizados
@@ -346,9 +374,11 @@ public class ComentarioService {
     /**
      * Obtiene los datos de un usuario o artista desde el microservicio de usuarios.
      *
-     * <p>En caso de error en la comunicación, retorna valores por defecto.</p>
+     * <p>
+     * En caso de error en la comunicación, retorna valores por defecto.
+     * </p>
      *
-     * @param idEntidad identificador del usuario o artista
+     * @param idEntidad   identificador del usuario o artista
      * @param tipoUsuario tipo de usuario (USUARIO o ARTISTA)
      * @return datos del usuario con nombre, slug y foto de perfil
      */
@@ -380,7 +410,9 @@ public class ComentarioService {
     /**
      * Convierte una entidad Comentario a su representación DTO.
      *
-     * <p>Incluye información del contenido comentado y metadatos de edición.</p>
+     * <p>
+     * Incluye información del contenido comentado y metadatos de edición.
+     * </p>
      *
      * @param comentario entidad a convertir
      * @return DTO del comentario

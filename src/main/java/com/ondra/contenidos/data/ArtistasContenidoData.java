@@ -36,7 +36,7 @@ public class ArtistasContenidoData {
                                             new CancionInfo("Formentera", 6, 2L, 1.29, "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203027/06_formentera_tzouxa.mp3"),
                                             new CancionInfo("En El Coche", 7, 2L, 1.29, "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203025/07_enelcoche_hkuwt0.mp3")
                                     ),
-                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204045/cover_ccqbkk.jpg"
+                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996438/alpha_g3u9em.jpg"
                             ),
                             new AlbumInfo("Cuarto Azul", 2L, 2020, 17.99,
                                     "Reedición de su primer disco con nuevos temas que marcaron su carrera.",
@@ -47,7 +47,7 @@ public class ArtistasContenidoData {
                                             new CancionInfo("SUPERESTRELLA", 4, 2L, 1.29, "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203428/04_superestrella_ftpprh.mp3"),
                                             new CancionInfo("CONEXIÓN PSÍQUICA", 5, 2L, 1.29, "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203429/05_conexionpsiquica_sfrxya.mp3")
                                     ),
-                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204049/cover_vxwxwj.webp"
+                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996437/cuartoazul_pulgxz.jpg"
                             )
                     )
             ),
@@ -64,7 +64,7 @@ public class ArtistasContenidoData {
                                             new CancionInfo("Hardaway", 3, 28L, 1.49, "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203645/03_hardaway_r6bfrp.mp3"),
                                             new CancionInfo("Ameri", 4, 28L, 1.49, "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203647/04_ameri_kmxz9b.mp3")
                                     ),
-                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204006/cover_pbdcw5.jpg"
+                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996291/ameri_kgqmuo.jpg"
                             ),
                             new AlbumInfo("Desde el Fin del Mundo", 28L, 2021, 21.99,
                                     "Álbum conceptual de Duki que explora trap melódico y letras introspectivas.",
@@ -75,13 +75,13 @@ public class ArtistasContenidoData {
                                             new CancionInfo("Cascada", 4, 28L, 1.49, "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203819/04_cascada_nlotlu.mp3"),
                                             new CancionInfo("Pintao", 5, 28L, 1.49, "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203827/05_pintao_yd37a2.mp3")
                                     ),
-                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764204010/cover_x3ys9o.jpg"
+                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996291/desdeelfindelmundo_yyaz3y.jpg"
                             )
                     ),
                     Arrays.asList(
                             new SingleInfo("Antes de Perderte", 28L, 1.49,
                                     "Single emotivo de Duki sobre relaciones y despedidas.",
-                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1764203999/cover_z0vmit.jpg",
+                                    "https://res.cloudinary.com/dh6w4hrx7/image/upload/v1765996291/antesdeperderte_vxrxz1.jpg",
                                     "https://res.cloudinary.com/dh6w4hrx7/video/upload/v1764203919/antesdeperderte_ukwtus.mp3")
                     )
             ),
